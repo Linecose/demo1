@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html class="light" lang="sq">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Qyteza Jonë — Qendra Edukative, Kuçovë</title>
+<meta name="description" content="Ndihmë me detyra, kurse lëndore, gjuhë të huaja, kurs kërcimi dhe kamp veror për fëmijët 6–17 vjeç. Regjistrohu sot në Kuçovë!"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-secondary-container": "#6b4b00",
+          "inverse-on-surface": "#f7f0e6",
+          "on-error": "#ffffff",
+          "secondary-fixed-dim": "#ffba27",
+          "background": "#fff8f0",
+          "on-primary": "#ffffff",
+          "surface-dim": "#e0d9d0",
+          "on-primary-container": "#7498b4",
+          "surface-container-highest": "#e8e2d8",
+          "on-secondary": "#ffffff",
+          "surface-container-lowest": "#ffffff",
+          "on-surface-variant": "#42474d",
+          "surface": "#fff8f0",
+          "surface-container-high": "#eee7dd",
+          "tertiary-fixed-dim": "#69d4f4",
+          "on-secondary-fixed": "#271900",
+          "on-primary-fixed": "#001e2f",
+          "outline": "#72787d",
+          "tertiary": "#001c23",
+          "outline-variant": "#c2c7cd",
+          "secondary-container": "#ffb702",
+          "inverse-surface": "#33302a",
+          "primary-container": "#023047",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "on-secondary-fixed-variant": "#5e4100",
+          "on-tertiary-fixed": "#001f27",
+          "surface-variant": "#e8e2d8",
+          "error-container": "#ffdad6",
+          "surface-tint": "#3e627b",
+          "on-error-container": "#93000a",
+          "on-tertiary-fixed-variant": "#004e5f",
+          "inverse-primary": "#a6cbe8",
+          "on-surface": "#1e1b16",
+          "on-background": "#1e1b16",
+          "primary": "#001a2a",
+          "surface-container-low": "#faf3e9",
+          "surface-bright": "#fff8f0",
+          "surface-container": "#f4ede3",
+          "tertiary-fixed": "#b2ebff",
+          "on-primary-fixed-variant": "#254a63",
+          "tertiary-container": "#00323e",
+          "secondary": "#7d5800",
+          "on-tertiary-container": "#27a1bf",
+          "primary-fixed": "#c8e6ff",
+          "primary-fixed-dim": "#a6cbe8",
+          "secondary-fixed": "#ffdea9"
+        },
+        borderRadius: {
+          DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"
+        },
+        spacing: {
+          margin: "32px", base: "8px", md: "24px", sm: "12px",
+          xl: "80px", lg: "48px", gutter: "24px", xs: "4px"
+        },
+        fontFamily: {
+          "headline-lg": ["Lexend"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Lexend"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Lexend"],
+          "label-sm": ["Plus Jakarta Sans"]
+        },
+        fontSize: {
+          "headline-lg": ["32px", { lineHeight: "1.25", fontWeight: "600" }],
+          "label-lg": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600" }],
+          "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+          "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+          "headline-xl": ["48px", { lineHeight: "1.2", fontWeight: "700" }],
+          "label-sm": ["12px", { lineHeight: "1.2", fontWeight: "500" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .squishy-btn:active { transform: scale(0.96); }
+
+  /* Floating WhatsApp */
+  .wa-bubble {
+    position: fixed;
+    bottom: 28px; right: 24px;
+    z-index: 999;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(37,211,102,.40);
+    transition: transform .2s, box-shadow .2s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .wa-bubble:hover { transform: scale(1.08); box-shadow: 0 12px 32px rgba(37,211,102,.5); }
+  .wa-bubble svg { width: 28px; height: 28px; fill: white; }
+
+  /* Pulse ring on WA */
+  .wa-bubble::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 2px solid rgba(37,211,102,.4);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%   { transform: scale(.9); opacity: .7; }
+    100% { transform: scale(1.3); opacity: 0; }
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Counter */
+  .counter { font-variant-numeric: tabular-nums; }
+
+  /* Mobile hamburger */
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: flex; }
+</style>
+</head>
+
+<body class="bg-background font-body-md text-on-background selection:bg-secondary-container selection:text-on-secondary-container">
+
+<!-- ═══ FLOATING WHATSAPP ═══ -->
+<a class="wa-bubble" href="https://wa.me/355694556722" target="_blank" aria-label="Na shkruani në WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2C8.268 2 2 8.268 2 16c0 2.493.648 4.835 1.782 6.87L2 30l7.338-1.923A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 01-5.825-1.594l-.417-.247-4.357 1.143 1.163-4.245-.271-.437A11.457 11.457 0 014.5 16C4.5 9.649 9.649 4.5 16 4.5S27.5 9.649 27.5 16 22.351 27.5 16 27.5zm6.29-8.62c-.345-.172-2.04-1.006-2.355-1.12-.315-.115-.544-.172-.773.172-.229.344-.887 1.12-1.087 1.35-.2.23-.4.258-.745.086-.344-.172-1.454-.536-2.77-1.71-1.024-.913-1.714-2.04-1.915-2.384-.2-.344-.021-.53.15-.702.154-.154.344-.4.517-.6.172-.2.229-.344.344-.573.115-.23.057-.43-.029-.602-.086-.172-.773-1.864-1.059-2.553-.279-.67-.563-.579-.773-.59l-.658-.011a1.263 1.263 0 00-.916.43c-.315.344-1.202 1.175-1.202 2.866 0 1.692 1.23 3.327 1.402 3.556.172.23 2.421 3.698 5.867 5.187.82.354 1.46.565 1.959.723.823.261 1.573.224 2.165.136.66-.099 2.04-.834 2.327-1.638.286-.804.286-1.493.2-1.637-.086-.144-.315-.23-.659-.402z"/>
+  </svg>
+</a>
+
+<!-- ═══ NAV ═══ -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#FFF8EE] border-b-2 border-[#023047]/10 shadow-[0_4px_12px_rgba(2,48,71,0.08)]">
+  <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-[1280px] mx-auto">
+
+    <!-- Logo -->
+    <div class="text-xl md:text-2xl font-bold text-[#023047] tracking-tight font-['Lexend'] flex items-center gap-2">
+      <span class="text-2xl">🌝</span> Qyteza Jonë
+    </div>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-[#219EBC] font-bold border-b-2 border-[#219EBC] pb-1 font-['Lexend'] text-base" href="#sherbimet">Shërbimet</a>
+      <a class="text-[#023047] hover:text-[#219EBC] transition-colors font-['Lexend'] font-medium text-base" href="#programet">Programet</a>
+      <a class="text-[#023047] hover:text-[#219EBC] transition-colors font-['Lexend'] font-medium text-base" href="#rreth">Rreth Nesh</a>
+      <a class="text-[#023047] hover:text-[#219EBC] transition-colors font-['Lexend'] font-medium text-base" href="#kamp">Kamp Veror</a>
+    </div>
+
+    <!-- CTA + hamburger -->
+    <div class="flex items-center space-x-3">
+      <a href="tel:+355694556722" class="hidden lg:flex items-center gap-2 text-[#023047] hover:text-[#219EBC] font-['Lexend'] font-medium text-sm transition-colors">
+        <span class="material-symbols-outlined text-base">call</span> 069 455 6722
+      </a>
+      <a href="#kontakt" class="bg-secondary-container text-on-secondary-container px-5 py-2.5 rounded-lg font-bold shadow-[0_2px_0_0_#6b4b00] active:translate-y-[1px] active:shadow-none transition-all squishy-btn text-sm md:text-base">
+        Regjistrohu
+      </a>
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-[#023047]/5 transition-colors" aria-label="Menu">
+        <span class="material-symbols-outlined text-[#023047]">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="flex-col md:hidden bg-[#FFF8EE] border-t border-[#023047]/10 px-6 py-4 space-y-4">
+    <a class="block font-['Lexend'] font-medium text-[#023047] hover:text-[#219EBC] py-2" href="#sherbimet" onclick="closeMobile()">Shërbimet</a>
+    <a class="block font-['Lexend'] font-medium text-[#023047] hover:text-[#219EBC] py-2" href="#programet" onclick="closeMobile()">Programet</a>
+    <a class="block font-['Lexend'] font-medium text-[#023047] hover:text-[#219EBC] py-2" href="#rreth" onclick="closeMobile()">Rreth Nesh</a>
+    <a class="block font-['Lexend'] font-medium text-[#023047] hover:text-[#219EBC] py-2" href="#kamp" onclick="closeMobile()">Kamp Veror</a>
+    <a class="block font-['Lexend'] font-medium text-[#219EBC]" href="tel:+355694556722">📞 069 455 6722</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="pt-32 pb-16 md:pt-48 md:pb-24 px-6 md:px-8 max-w-[1280px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+    <!-- Left -->
+    <div class="space-y-8 reveal">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-on-tertiary-container/10 text-on-tertiary-container font-label-lg uppercase tracking-wider text-xs">
+        <span class="material-symbols-outlined text-sm mr-2">auto_awesome</span>
+        Regjistrime Hapur · 2025
+      </div>
+
+      <h1 class="font-headline-xl text-primary-container leading-tight">
+        Shtëpia e Dytë e <span class="text-on-tertiary-container">Fëmijës Tuaj</span>
+      </h1>
+
+      <p class="text-body-lg text-on-surface-variant max-w-lg">
+        Zbuloni një mjedis ku kurioziteti takon kurrikulën. Ofrojmë kurse lëndore, gjuhë të huaja, kurs kërcimi dhe aktivitete kreative — gjithçka nën një çati, në zemër të Kuçovës.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-2">
+        <a href="#kontakt" class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-headline-md text-lg shadow-[0_4px_0_0_#6b4b00] squishy-btn flex items-center justify-center transition-all">
+          Regjistrohu Tani
+          <span class="material-symbols-outlined ml-2">arrow_forward</span>
+        </a>
+        <a href="#sherbimet" class="border-2 border-primary-container text-primary-container px-8 py-4 rounded-xl font-headline-md text-lg hover:bg-primary-container/5 squishy-btn flex items-center justify-center transition-all">
+          Shiko Shërbimet
+        </a>
+      </div>
+
+      <!-- Trust pills -->
+      <div class="flex flex-wrap gap-3 pt-2">
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full">
+          <span class="material-symbols-outlined text-sm text-on-tertiary-container">verified</span> 200+ Nxënës Aktiv
+        </span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full">
+          <span class="material-symbols-outlined text-sm text-secondary">star</span> Vlerësim 4.9/5
+        </span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full">
+          <span class="material-symbols-outlined text-sm text-on-tertiary-container">groups</span> 8 Mësues Ekspert
+        </span>
+      </div>
+    </div>
+
+    <!-- Right visual -->
+    <div class="relative reveal" style="transition-delay:.15s">
+      <div class="absolute -top-6 -left-6 w-24 h-24 bg-secondary-container rounded-full opacity-20 blur-2xl"></div>
+      <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-on-tertiary-container rounded-full opacity-20 blur-2xl"></div>
+
+      <!-- Main image card -->
+      <div class="rounded-3xl overflow-hidden shadow-xl border-8 border-white">
+        <img
+          alt="Fëmijë duke mësuar"
+          class="w-full h-full object-cover aspect-[4/3]"
+          src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        />
+        <div style="display:none" class="aspect-[4/3] bg-gradient-to-br from-[#023047] to-[#219EBC] items-center justify-center text-white text-center p-12 flex-col gap-4">
+          <span class="text-8xl">🎓</span>
+          <p class="font-['Lexend'] text-xl font-semibold">Ku të mësuarit bëhet aventurë!</p>
+        </div>
+      </div>
+
+      <!-- Floating stat card 1 -->
+      <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-outline-variant">
+        <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-secondary-container">emoji_events</span>
+        </div>
+        <div>
+          <div class="font-['Lexend'] font-bold text-primary-container text-lg leading-none counter" data-target="95">0</div>
+          <div class="text-xs text-on-surface-variant font-semibold mt-0.5">% Kënaqësi</div>
+        </div>
+      </div>
+
+      <!-- Floating stat card 2 -->
+      <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-outline-variant">
+        <div class="w-10 h-10 bg-on-tertiary-container/10 rounded-xl flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-tertiary-container">school</span>
+        </div>
+        <div>
+          <div class="font-['Lexend'] font-bold text-primary-container text-lg leading-none counter" data-target="12">0</div>
+          <div class="text-xs text-on-surface-variant font-semibold mt-0.5">Kurse Aktive</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ═══ -->
+<section class="bg-primary-container text-on-primary py-12">
+  <div class="max-w-[1280px] mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+    <div class="space-y-2 reveal">
+      <div class="text-headline-xl text-secondary-container counter" data-target="200" data-suffix="+">0</div>
+      <div class="font-label-lg uppercase tracking-widest text-on-primary-container">Nxënës Aktiv</div>
+    </div>
+    <div class="space-y-2 border-y md:border-y-0 md:border-x border-on-primary-container/20 py-8 md:py-0 reveal" style="transition-delay:.1s">
+      <div class="text-headline-xl text-secondary-container counter" data-target="12">0</div>
+      <div class="font-label-lg uppercase tracking-widest text-on-primary-container">Kurse Speciale</div>
+    </div>
+    <div class="space-y-2 md:border-r border-on-primary-container/20 reveal" style="transition-delay:.2s">
+      <div class="text-headline-xl text-secondary-container counter" data-target="8">0</div>
+      <div class="font-label-lg uppercase tracking-widest text-on-primary-container">Mësues Ekspert</div>
+    </div>
+    <div class="space-y-2 reveal" style="transition-delay:.3s">
+      <div class="text-headline-xl text-secondary-container">4.9<span class="text-3xl">★</span></div>
+      <div class="font-label-lg uppercase tracking-widest text-on-primary-container">Vlerësim Prindërit</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISSION & VALUES ═══ -->
+<section class="py-24 px-6 md:px-8 max-w-[1280px] mx-auto" id="rreth">
+  <div class="text-center mb-16 space-y-4 reveal">
+    <h2 class="font-headline-lg text-primary-container">Misioni & Vlerat Tona</h2>
+    <p class="text-on-surface-variant max-w-2xl mx-auto">Duke ndërtuar themelet e të nxënit gjatë gjithë jetës — me dedikimin, inovacionin dhe dashurinë e vërtetë për fëmijën.</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <!-- Large mission card -->
+    <div class="md:col-span-2 bg-white p-10 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] border-t-4 border-on-tertiary-container flex flex-col justify-between reveal">
+      <div>
+        <span class="material-symbols-outlined text-4xl text-on-tertiary-container mb-6 block">rocket_launch</span>
+        <h3 class="font-headline-md text-primary-container mb-4">Misioni Ynë</h3>
+        <p class="text-body-lg text-on-surface-variant">T'i fuqizojmë brezit të ardhshëm me mendim kritik, inteligjencë emocionale dhe dashuri të vërtetë për zbulimin — në një mjedis të sigurt dhe gjithëpërfshirës.</p>
+      </div>
+    </div>
+    <!-- Value 1 -->
+    <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] border-t-4 border-secondary-container group hover:-translate-y-1 transition-transform reveal" style="transition-delay:.08s">
+      <span class="material-symbols-outlined text-3xl text-secondary-container mb-4 block">favorite</span>
+      <h4 class="font-headline-md text-base mb-2">Siguria Mbi Gjithçka</h4>
+      <p class="text-body-md text-on-surface-variant">Një hapësirë e mbrojtur ku çdo fëmijë ndjehet i kuptuar dhe i mirëpritur.</p>
+    </div>
+    <!-- Value 2 -->
+    <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] border-t-4 border-on-tertiary-container group hover:-translate-y-1 transition-transform reveal" style="transition-delay:.12s">
+      <span class="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">lightbulb</span>
+      <h4 class="font-headline-md text-base mb-2">Inovacion</h4>
+      <p class="text-body-md text-on-surface-variant">Metoda moderne mësimdhënieje që i përshtaten ritmit të çdo fëmije.</p>
+    </div>
+    <!-- Value 3 -->
+    <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] border-t-4 border-on-tertiary-container group hover:-translate-y-1 transition-transform reveal" style="transition-delay:.16s">
+      <span class="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">groups</span>
+      <h4 class="font-headline-md text-base mb-2">Komunitet</h4>
+      <p class="text-body-md text-on-surface-variant">Lidhje të forta ndërmjet mësuesve, prindërve dhe nxënësve çdo ditë.</p>
+    </div>
+    <!-- Value 4 -->
+    <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] border-t-4 border-secondary-container group hover:-translate-y-1 transition-transform reveal" style="transition-delay:.2s">
+      <span class="material-symbols-outlined text-3xl text-secondary-container mb-4 block">auto_stories</span>
+      <h4 class="font-headline-md text-base mb-2">Integritet</h4>
+      <p class="text-body-md text-on-surface-variant">Ndershmëria dhe etika si baza e çdo hapi të rrugëtimit akademik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="py-24 bg-surface-container-low px-6 md:px-8" id="sherbimet">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal">
+      <div class="max-w-xl">
+        <h2 class="font-headline-lg text-primary-container mb-4">Shërbime Gjithëpërfshirëse</h2>
+        <p class="text-on-surface-variant">Përtej klasës, ofrojmë mbështetje të plotë për të ushqyer çdo aspekt të zhvillimit të fëmijës suaj.</p>
+      </div>
+      <a href="#kontakt" class="text-on-tertiary-container font-label-lg flex items-center hover:underline whitespace-nowrap">
+        Regjistrohu Sot
+        <span class="material-symbols-outlined ml-1">chevron_right</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Kurse Lëndore -->
+      <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] flex flex-col gap-6 hover:-translate-y-1 transition-transform reveal">
+        <div class="w-14 h-14 bg-on-tertiary-container/10 rounded-2xl flex items-center justify-center text-on-tertiary-container">
+          <span class="material-symbols-outlined text-3xl">menu_book</span>
+        </div>
+        <h3 class="font-headline-md">Kurse Lëndore</h3>
+        <p class="text-on-surface-variant">Matematikë, Fizikë, Kimi, Biologji, Informatikë dhe Gjuhë Shqipe. Thellim i vërtetë i njohurive për klasat 6–12.</p>
+        <div class="mt-auto">
+          <span class="inline-block bg-on-tertiary-container/10 text-on-tertiary-container text-xs font-bold px-3 py-1 rounded-full">Klasa 6–12</span>
+        </div>
+      </div>
+
+      <!-- Ndihmë Detyra -->
+      <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] flex flex-col gap-6 hover:-translate-y-1 transition-transform reveal" style="transition-delay:.07s">
+        <div class="w-14 h-14 bg-secondary-container/20 rounded-2xl flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined text-3xl">home_work</span>
+        </div>
+        <h3 class="font-headline-md">Ndihmë me Detyra</h3>
+        <p class="text-on-surface-variant">Tutorë ekspertë ndihmojnë me detyrat çdo ditë pas shkollës — fëmija arrin në shtëpi i qetë, lëndët të kuptuara.</p>
+        <div class="mt-auto">
+          <span class="inline-block bg-secondary-container/20 text-secondary text-xs font-bold px-3 py-1 rounded-full">Klasa 1–9 · Çdo ditë</span>
+        </div>
+      </div>
+
+      <!-- Gjuhë të Huaja -->
+      <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] flex flex-col gap-6 hover:-translate-y-1 transition-transform reveal" style="transition-delay:.14s">
+        <div class="w-14 h-14 bg-on-tertiary-container/10 rounded-2xl flex items-center justify-center text-on-tertiary-container">
+          <span class="material-symbols-outlined text-3xl">translate</span>
+        </div>
+        <h3 class="font-headline-md">Gjuhë të Huaja</h3>
+        <p class="text-on-surface-variant">Anglisht dhe Italisht me metoda moderne ndërvepruese. I dobishëm si për shkollën ashtu edhe për karrierën e fëmijës.</p>
+        <div class="mt-auto">
+          <span class="inline-block bg-on-tertiary-container/10 text-on-tertiary-container text-xs font-bold px-3 py-1 rounded-full">Të gjitha moshat</span>
+        </div>
+      </div>
+
+      <!-- Kurs Kërcimi -->
+      <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] flex flex-col gap-6 hover:-translate-y-1 transition-transform reveal" style="transition-delay:.21s">
+        <div class="w-14 h-14 bg-secondary-container/20 rounded-2xl flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined text-3xl">festival</span>
+        </div>
+        <h3 class="font-headline-md">Kurs Kërcimi & Kultur</h3>
+        <p class="text-on-surface-variant">Arte të lëvizjes, ritëm dhe ekspresion krijues për të gjitha nivelet. Ndihmon besimin, disiplinën dhe gëzimin.</p>
+        <div class="mt-auto">
+          <span class="inline-block bg-secondary-container/20 text-secondary text-xs font-bold px-3 py-1 rounded-full">Të gjitha nivelet</span>
+        </div>
+      </div>
+
+      <!-- Kamp Veror — wide card -->
+      <div class="bg-white p-8 rounded-3xl shadow-[0_4px_12px_rgba(2,48,71,0.08)] lg:col-span-2 flex flex-col md:flex-row gap-8 items-center border-2 border-on-tertiary-container/10 hover:-translate-y-1 transition-transform reveal" style="transition-delay:.28s">
+        <div class="w-20 h-20 shrink-0 bg-on-tertiary-container text-white rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">wb_sunny</span>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-headline-md mb-2">Kamp Veror ☀️</h3>
+          <p class="text-on-surface-variant mb-4">Tre muaj me aventura, miqësi dhe aktivitete edukative gjatë verës. Qershor – Gusht. Vendet janë të kufizuara — mos prit!</p>
+          <a href="#kontakt" class="inline-block bg-primary-container text-white px-6 py-2.5 rounded-lg font-label-lg squishy-btn transition-all hover:opacity-90">Rezervo Vendin</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS ═══ -->
+<section class="py-24 px-6 md:px-8 max-w-[1280px] mx-auto" id="programet">
+  <h2 class="font-headline-lg text-primary-container text-center mb-4 reveal">Programet Akademike</h2>
+  <p class="text-on-surface-variant text-center max-w-xl mx-auto mb-16 reveal">Tre nivele të dizajnuara me kujdes sipas moshës dhe nevojës specifike të fëmijës suaj.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- Klasa 1–5 -->
+    <div class="relative overflow-hidden group rounded-3xl bg-white border border-outline-variant hover:border-on-tertiary-container transition-colors reveal">
+      <div class="h-48 overflow-hidden bg-gradient-to-br from-secondary-container/30 to-secondary-container/10 flex items-center justify-center">
+        <span class="text-8xl group-hover:scale-110 transition-transform duration-500 inline-block">🌱</span>
+      </div>
+      <div class="p-8">
+        <div class="text-on-tertiary-container font-label-lg mb-2">THEMELI</div>
+        <h3 class="font-headline-md text-primary-container mb-4">Klasa 1 – 5</h3>
+        <p class="text-on-surface-variant mb-6">Ndërtimi i aftësive bazë të leximit, llogaritjes dhe socializmit nëpërmjet të nxënit të bazuar në lojë.</p>
+        <ul class="space-y-2 mb-6 text-sm text-on-surface-variant">
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Ndihmë me detyra çdo ditë</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Lexim & shkrim i avancuar</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Aktivitete artistike</li>
+        </ul>
+        <a href="#kontakt" class="w-full border-2 border-on-tertiary-container text-on-tertiary-container py-3 rounded-xl font-bold hover:bg-on-tertiary-container hover:text-white transition-colors squishy-btn block text-center">
+          Mëso Më Shumë
+        </a>
+      </div>
+    </div>
+
+    <!-- Klasa 6–9 — Featured -->
+    <div class="relative overflow-hidden group rounded-3xl bg-primary-container border-2 border-primary-container transition-colors reveal shadow-2xl" style="transition-delay:.1s">
+      <div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full z-10">⭐ Më i popullarizuari</div>
+      <div class="h-48 overflow-hidden bg-gradient-to-br from-on-tertiary-container/30 to-on-tertiary-container/10 flex items-center justify-center">
+        <span class="text-8xl group-hover:scale-110 transition-transform duration-500 inline-block">🚀</span>
+      </div>
+      <div class="p-8">
+        <div class="text-on-tertiary-container font-label-lg mb-2 opacity-80">EKSPLORIMI</div>
+        <h3 class="font-headline-md text-white mb-4">Klasa 6 – 9</h3>
+        <p class="text-on-primary-container mb-6">Zhvillimi i pavarësisë dhe mendimit kritik nëpërmjet lëndëve shkencore dhe humanistike.</p>
+        <ul class="space-y-2 mb-6 text-sm text-on-primary-container">
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-secondary-container">check_circle</span> 6 lëndë të specializuara</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-secondary-container">check_circle</span> Ndihmë 1-me-1 kur duhet</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-secondary-container">check_circle</span> Simulime provimesh</li>
+        </ul>
+        <a href="#kontakt" class="w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-bold squishy-btn block text-center shadow-[0_3px_0_0_#6b4b00] active:translate-y-[1px] active:shadow-none transition-all">
+          Regjistrohu Tani
+        </a>
+      </div>
+    </div>
+
+    <!-- Klasa 10–12 -->
+    <div class="relative overflow-hidden group rounded-3xl bg-white border border-outline-variant hover:border-on-tertiary-container transition-colors reveal" style="transition-delay:.2s">
+      <div class="h-48 overflow-hidden bg-gradient-to-br from-primary-container/20 to-primary-container/5 flex items-center justify-center">
+        <span class="text-8xl group-hover:scale-110 transition-transform duration-500 inline-block">🎯</span>
+      </div>
+      <div class="p-8">
+        <div class="text-on-tertiary-container font-label-lg mb-2">ELITAR</div>
+        <h3 class="font-headline-md text-primary-container mb-4">Klasa 10 – 12</h3>
+        <p class="text-on-surface-variant mb-6">Përgatitje intensive për maturën shtetërore, konkurset akademike dhe universitetet.</p>
+        <ul class="space-y-2 mb-6 text-sm text-on-surface-variant">
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Matura & provimet finale</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Konkurse akademike</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-on-tertiary-container">check_circle</span> Mentorim i personalizuar</li>
+        </ul>
+        <a href="#kontakt" class="w-full border-2 border-on-tertiary-container text-on-tertiary-container py-3 rounded-xl font-bold hover:bg-on-tertiary-container hover:text-white transition-colors squishy-btn block text-center">
+          Mëso Më Shumë
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SUMMER CAMP BANNER ═══ -->
+<section class="py-16 px-6 md:px-8 bg-surface-container-low" id="kamp">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0E7C7B] to-[#2D6A4F] p-12 md:p-20 flex flex-col md:flex-row items-center gap-10 reveal">
+      <div class="absolute -right-12 -top-12 text-[220px] opacity-10 pointer-events-none select-none leading-none">☀️</div>
+      <div class="flex-1 text-white space-y-5 relative z-10">
+        <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase bg-white/15 border border-white/25 px-4 py-2 rounded-full">
+          <span class="material-symbols-outlined text-sm">wb_sunny</span> Kamp Veror 2025
+        </div>
+        <h2 class="font-['Lexend'] text-3xl md:text-4xl font-bold">Vera më e paharrueshme e fëmijës tuaj</h2>
+        <p class="text-white/80 text-lg max-w-lg">Tre muaj plot aventura, miqësi dhe të mësuarit në mënyrën më argëtuese. Nga qershori deri në gusht — orare fleksibël për çdo familje.</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-white/15 border border-white/25 text-white text-sm font-semibold px-4 py-2 rounded-full">🌿 Qershor</span>
+          <span class="bg-white/15 border border-white/25 text-white text-sm font-semibold px-4 py-2 rounded-full">☀️ Korrik</span>
+          <span class="bg-white/15 border border-white/25 text-white text-sm font-semibold px-4 py-2 rounded-full">🍂 Gusht</span>
+          <span class="bg-white/15 border border-white/25 text-white text-sm font-semibold px-4 py-2 rounded-full">⏰ 09:00 – 17:00</span>
+        </div>
+      </div>
+      <div class="shrink-0 relative z-10">
+        <a href="#kontakt" class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-['Lexend'] font-bold text-lg shadow-[0_4px_0_0_#6b4b00] squishy-btn flex items-center gap-3 transition-all whitespace-nowrap">
+          Rezervo Vendin
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <p class="text-white/60 text-xs text-center mt-3">⚠️ Vendet janë të kufizuara</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="py-24 bg-[#023047] text-white overflow-hidden">
+  <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+    <h2 class="font-headline-lg text-secondary-container text-center mb-4 reveal">Çfarë Thonë Prindërit</h2>
+    <p class="text-center text-white/60 max-w-lg mx-auto mb-16 reveal">Fjalët e tyre tregojnë më shumë se çdo gjë tjetër.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="relative p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-secondary-container/40 transition-colors reveal">
+        <span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-2" style="font-variation-settings:'FILL' 1;">format_quote</span>
+        <p class="text-body-lg italic mb-8 text-white/85">"Vajza ime filloi ta gjejë matematikën interesante pas dy javësh. Mësuesit janë shumë profesionalë dhe të durueshëm. Nuk mund ta imagjinoj pa Qytezën Jonë!"</p>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary-container font-bold">MH</div>
+          <div>
+            <div class="font-semibold text-base">Mirela Hoxha</div>
+            <div class="text-sm text-slate-300">Nënë e Elsa-s, Klasa 5</div>
+          </div>
+        </div>
+        <div class="mt-4 text-secondary-container text-sm">★★★★★</div>
+      </div>
+
+      <div class="relative p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-secondary-container/40 transition-colors reveal" style="transition-delay:.1s">
+        <span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-2" style="font-variation-settings:'FILL' 1;">format_quote</span>
+        <p class="text-body-lg italic mb-8 text-white/85">"Djali im tani pret me padurim të shkojë çdo ditë. Ambienti është ngrohtë dhe shihet kujdesi i vërtetë nga stafi. Rekomandoj me gjithë zemër!"</p>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-on-tertiary-container flex items-center justify-center text-white font-bold">AK</div>
+          <div>
+            <div class="font-semibold text-base">Arben Kodra</div>
+            <div class="text-sm text-slate-300">Baba i Erion-it, Klasa 7</div>
+          </div>
+        </div>
+        <div class="mt-4 text-secondary-container text-sm">★★★★★</div>
+      </div>
+
+      <div class="relative p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-secondary-container/40 transition-colors reveal" style="transition-delay:.2s">
+        <span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-2" style="font-variation-settings:'FILL' 1;">format_quote</span>
+        <p class="text-body-lg italic mb-8 text-white/85">"Kursi i anglishtes ka qenë i mrekullueshëm. Vajza ime tani flet me siguri dhe notat e saj janë rritur dukshëm. Qyteza Jonë e ka ndryshuar."</p>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary-container font-bold">LB</div>
+          <div>
+            <div class="font-semibold text-base">Lira Beqiri</div>
+            <div class="text-sm text-slate-300">Nënë e Sara-s, Klasa 9</div>
+          </div>
+        </div>
+        <div class="mt-4 text-secondary-container text-sm">★★★★★</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT / REGISTRATION ═══ -->
+<section class="py-24 px-6 md:px-8 max-w-[1280px] mx-auto" id="kontakt">
+  <div class="bg-white rounded-[40px] shadow-2xl overflow-hidden flex flex-col lg:flex-row reveal">
+
+    <!-- Left info -->
+    <div class="lg:w-1/2 p-10 md:p-16 lg:p-20 bg-surface-container-low">
+      <h2 class="font-headline-lg text-primary-container mb-4">Siguroni Vendin e Fëmijës Tuaj</h2>
+      <p class="text-on-surface-variant mb-10">Jeni gati? Plotësoni formularin dhe ekipi ynë ju kontakton brenda 24 orëve për të gjetur programin ideal.</p>
+
+      <div class="space-y-8 mb-12">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-on-tertiary-container/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-tertiary-container">call</span>
+          </div>
+          <div>
+            <div class="font-bold text-primary-container">Na Telefononi</div>
+            <a href="tel:+355694556722" class="text-on-surface-variant hover:text-on-tertiary-container transition-colors">+355 694 556 722</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-on-tertiary-container/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-tertiary-container">chat</span>
+          </div>
+          <div>
+            <div class="font-bold text-primary-container">WhatsApp</div>
+            <a href="https://wa.me/355694556722" target="_blank" class="text-on-surface-variant hover:text-on-tertiary-container transition-colors">+355 694 556 722</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-on-tertiary-container/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-tertiary-container">mail</span>
+          </div>
+          <div>
+            <div class="font-bold text-primary-container">Email</div>
+            <a href="mailto:rasenieriselda@yahoo.com" class="text-on-surface-variant hover:text-on-tertiary-container transition-colors break-all">rasenieriselda@yahoo.com</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-on-tertiary-container/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-tertiary-container">location_on</span>
+          </div>
+          <div>
+            <div class="font-bold text-primary-container">Adresa</div>
+            <div class="text-on-surface-variant">Rruga Raiffeisen, Kuçovë, Shqipëri</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orari -->
+      <div class="bg-white rounded-2xl p-6 border border-outline-variant">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-on-tertiary-container">schedule</span>
+          <h4 class="font-bold text-primary-container">Orari i Punës</h4>
+        </div>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between text-on-surface-variant">
+            <span>E Hënë – E Premte</span><span class="font-semibold text-primary-container">14:00 – 20:00</span>
+          </div>
+          <div class="flex justify-between text-on-surface-variant border-t border-outline-variant pt-2">
+            <span>E Shtunë</span><span class="font-semibold text-primary-container">09:00 – 13:00</span>
+          </div>
+          <div class="flex justify-between text-on-surface-variant border-t border-outline-variant pt-2">
+            <span>Verë (Qer – Gush)</span><span class="font-semibold text-primary-container">09:00 – 17:00</span>
+          </div>
+          <div class="flex justify-between text-on-surface-variant border-t border-outline-variant pt-2">
+            <span>E Diel</span><span class="font-semibold text-red-500">Mbyllur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="lg:w-1/2 p-10 md:p-16 lg:p-20">
+      <h3 class="font-headline-md text-primary-container mb-2">Formulari i Regjistrimit</h3>
+      <p class="text-on-surface-variant text-sm mb-8">Plotësoni fushat dhe ne kujdesemi për pjesën tjetër. 🌟</p>
+
+      <div class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label class="font-label-lg text-primary-container block">Emri i Prindërit *</label>
+            <input id="f-name" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" placeholder="Emri juaj" type="text"/>
+          </div>
+          <div class="space-y-2">
+            <label class="font-label-lg text-primary-container block">Numri i Telefonit *</label>
+            <input id="f-phone" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" placeholder="069 XXX XXXX" type="tel"/>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="font-label-lg text-primary-container block">Emri i Fëmijës *</label>
+          <input id="f-child" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" placeholder="Emri i fëmijës" type="text"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label class="font-label-lg text-primary-container block">Klasa / Mosha</label>
+            <select id="f-grade" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none appearance-none">
+              <option value="">Zgjidhni...</option>
+              <option>Klasa 1–3 (6–9 vjeç)</option>
+              <option>Klasa 4–5 (10–11 vjeç)</option>
+              <option>Klasa 6–9 (12–15 vjeç)</option>
+              <option>Klasa 10–12 (16–18 vjeç)</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label class="font-label-lg text-primary-container block">Programi</label>
+            <select id="f-program" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none appearance-none">
+              <option value="">Zgjidhni...</option>
+              <option>Detyrat e Shtëpisë</option>
+              <option>Kurse Lëndore</option>
+              <option>Gjuhë të Huaja</option>
+              <option>Kurs Kërcimi</option>
+              <option>Kamp Veror</option>
+              <option>Aktivitete Fundjavore</option>
+            </select>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="font-label-lg text-primary-container block">Mesazh (opsional)</label>
+          <textarea id="f-msg" class="w-full bg-surface-container rounded-xl border-none p-4 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" placeholder="Na tregoni çfarë kërkoni ose nëse keni pyetje..." rows="4"></textarea>
+        </div>
+        <button onclick="submitForm()" class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-xl font-headline-md shadow-[0_4px_0_0_#6b4b00] active:translate-y-[1px] active:shadow-none transition-all squishy-btn">
+          Dërgo Regjistrimin ✨
+        </button>
+        <div id="f-success" style="display:none" class="bg-green-50 border border-green-200 text-green-800 rounded-xl p-4 text-center font-semibold text-sm">
+          🎉 Faleminderit! Do ju kontaktojmë brenda 24 orëve!
+        </div>
+        <p class="text-xs text-center text-on-surface-variant">🔒 Të dhënat tuaja janë të sigurta dhe konfidenciale</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-[#023047] border-t-4 border-[#FFB703]">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-10 w-full px-6 md:px-8 py-16 max-w-[1280px] mx-auto">
+
+    <div class="space-y-5 md:col-span-1">
+      <div class="text-xl font-bold text-[#FFB703] font-['Lexend'] flex items-center gap-2">
+        <span class="text-2xl">🌝</span> Qyteza Jonë
+      </div>
+      <p class="text-slate-300 font-['Lexend'] text-sm font-light leading-relaxed">
+        Shtëpia e dytë e fëmijës suaj — ku edukimi takon argëtimin dhe potenciali nuk ka kufi.
+      </p>
+      <div class="flex gap-3">
+        <a href="https://wa.me/355694556722" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container transition-colors" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.493.648 4.835 1.782 6.87L2 30l7.338-1.923A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 01-5.825-1.594l-.417-.247-4.357 1.143 1.163-4.245-.271-.437A11.457 11.457 0 014.5 16C4.5 9.649 9.649 4.5 16 4.5S27.5 9.649 27.5 16 22.351 27.5 16 27.5zm6.29-8.62c-.345-.172-2.04-1.006-2.355-1.12-.315-.115-.544-.172-.773.172-.229.344-.887 1.12-1.087 1.35-.2.23-.4.258-.745.086-.344-.172-1.454-.536-2.77-1.71-1.024-.913-1.714-2.04-1.915-2.384-.2-.344-.021-.53.15-.702.154-.154.344-.4.517-.6.172-.2.229-.344.344-.573.115-.23.057-.43-.029-.602-.086-.172-.773-1.864-1.059-2.553-.279-.67-.563-.579-.773-.59l-.658-.011a1.263 1.263 0 00-.916.43c-.315.344-1.202 1.175-1.202 2.866 0 1.692 1.23 3.327 1.402 3.556.172.23 2.421 3.698 5.867 5.187.82.354 1.46.565 1.959.723.823.261 1.573.224 2.165.136.66-.099 2.04-.834 2.327-1.638.286-.804.286-1.493.2-1.637-.086-.144-.315-.23-.659-.402z"/></svg>
+        </a>
+        <a href="mailto:rasenieriselda@yahoo.com" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container transition-colors" aria-label="Email">
+          <span class="material-symbols-outlined text-white text-base">mail</span>
+        </a>
+        <a href="tel:+355694556722" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container transition-colors" aria-label="Phone">
+          <span class="material-symbols-outlined text-white text-base">call</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-5">
+      <h4 class="text-white font-bold font-['Lexend'] text-base">Lidhje të Shpejta</h4>
+      <ul class="space-y-3">
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light hover:underline decoration-[#FFB703] underline-offset-4" href="#rreth">Rreth Nesh</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light hover:underline decoration-[#FFB703] underline-offset-4" href="#programet">Programet</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light hover:underline decoration-[#FFB703] underline-offset-4" href="#kamp">Kamp Veror</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light hover:underline decoration-[#FFB703] underline-offset-4" href="#kontakt">Kontakti</a></li>
+      </ul>
+    </div>
+
+    <div class="space-y-5">
+      <h4 class="text-white font-bold font-['Lexend'] text-base">Shërbimet Tona</h4>
+      <ul class="space-y-3">
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light" href="#sherbimet">Kurse Lëndore</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light" href="#sherbimet">Ndihmë me Detyra</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light" href="#sherbimet">Gjuhë të Huaja</a></li>
+        <li><a class="text-slate-300 hover:text-white transition-colors font-['Lexend'] text-sm font-light" href="#sherbimet">Kurs Kërcimi</a></li>
+      </ul>
+    </div>
+
+    <div class="space-y-5">
+      <h4 class="text-white font-bold font-['Lexend'] text-base">Kontakti i Shpejtë</h4>
+      <ul class="space-y-3">
+        <li class="text-slate-300 text-sm flex items-center gap-2"><span class="material-symbols-outlined text-[#FFB703] text-base">call</span> +355 694 556 722</li>
+        <li class="text-slate-300 text-sm flex items-center gap-2"><span class="material-symbols-outlined text-[#FFB703] text-base">location_on</span> Rruga Raiffeisen, Kuçovë</li>
+        <li class="text-slate-300 text-sm flex items-center gap-2"><span class="material-symbols-outlined text-[#FFB703] text-base">schedule</span> E Hënë–Premte: 14–20</li>
+      </ul>
+      <!-- Newsletter -->
+      <div class="pt-2">
+        <p class="text-slate-300 text-xs mb-3">Qëndroni të informuar me lajmet tona.</p>
+        <div class="flex">
+          <input id="nl-email" class="bg-white/10 border-none text-white rounded-l-lg p-2.5 w-full text-sm outline-none placeholder:text-white/40" placeholder="Email-i juaj" type="email"/>
+          <button onclick="subscribeNL()" class="bg-[#FFB703] text-[#023047] px-4 rounded-r-lg font-bold text-xs transition-opacity hover:opacity-80 whitespace-nowrap">Bashkohu</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="max-w-[1280px] mx-auto px-6 md:px-8 py-6 border-t border-white/10 text-center text-slate-400 font-['Lexend'] text-sm font-light">
+    © 2025 Qyteza Jonë · Kuçovë, Shqipëri · Të gjitha të drejtat e rezervuara
+  </div>
+</footer>
+
+<script>
+  // ── Hamburger
+  const ham = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  ham.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ── Scroll reveal
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Animated counters
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target / 60));
+      const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur + suffix;
+        if (cur >= target) clearInterval(t);
+      }, 25);
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+  // ── Form submit
+  function submitForm() {
+    const name  = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const child = document.getElementById('f-child').value.trim();
+    if (!name || !phone || !child) {
+      alert('Ju lutemi plotësoni emrin, telefonin dhe emrin e fëmijës!');
+      return;
+    }
+    const s = document.getElementById('f-success');
+    s.style.display = 'block';
+    ['f-name','f-phone','f-child','f-grade','f-program','f-msg'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    setTimeout(() => s.style.display = 'none', 7000);
+  }
+
+  // ── Newsletter
+  function subscribeNL() {
+    const el = document.getElementById('nl-email');
+    if (!el.value.trim() || !el.value.includes('@')) { el.focus(); return; }
+    el.value = '';
+    el.placeholder = '✓ U bashkuat!';
+    setTimeout(() => el.placeholder = 'Email-i juaj', 3000);
+  }
+
+  // ── Material symbols workaround (render icons from data-icon attribute)
+  document.querySelectorAll('.material-symbols-outlined[data-icon]').forEach(el => {
+    if (!el.textContent.trim()) el.textContent = el.dataset.icon;
+  });
+</script>
+</body>
+</html>

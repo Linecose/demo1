@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qyteza Jonë | Qendër Edukative – Kuçovë</title>
+  <meta name="description" content="Ndihmë me detyra, kurse lëndore, gjuhë të huaja, kurs kërcimi dhe mbështetje psikologjike për fëmijët 6–17 vjeç. Regjistrohu sot në Kuçovë!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:    #0D1B2A;
+      --ink2:   #4A5568;
+      --accent: #E85D26;
+      --gold:   #F5A623;
+      --teal:   #0E7C7B;
+      --green:  #2D6A4F;
+      --light:  #F8F5F0;
+      --white:  #FFFFFF;
+      --border: rgba(13,27,42,.10);
+      --r:      16px;
+      --shadow: 0 8px 32px rgba(13,27,42,.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky; top: 0; z-index: 300;
+      background: var(--ink);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px; gap: 12px;
+    }
+    .nav-logo { font-size: 1rem; font-weight: 800; color: var(--white); letter-spacing: -.02em; flex-shrink: 0; }
+    .nav-logo span { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-phone {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.7); white-space: nowrap;
+    }
+    .nav-btn {
+      background: var(--accent); color: var(--white);
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: .82rem;
+      padding: 10px 18px; border-radius: 50px; border: none; cursor: pointer;
+      white-space: nowrap; transition: background .2s, transform .15s; flex-shrink: 0;
+    }
+    .nav-btn:active { transform: scale(.96); background: #c94d1a; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--ink); color: var(--white);
+      padding: 56px 24px 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .glow {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .glow-a { width: 420px; height: 420px; background: var(--accent); opacity: .07; top: -160px; right: -140px; }
+    .glow-b { width: 320px; height: 320px; background: var(--teal); opacity: .07; bottom: 0; left: -100px; }
+    .hero-inner { position: relative; z-index: 2; max-width: 580px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(245,166,35,.14); border: 1px solid rgba(245,166,35,.28);
+      color: var(--gold); font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
+    }
+    .hero-badge::before { content: '★'; font-size: .8rem; }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 7.5vw, 3.2rem);
+      font-weight: 700; line-height: 1.18;
+      letter-spacing: -.025em; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: .97rem; line-height: 1.75;
+      color: rgba(255,255,255,.68); margin-bottom: 38px;
+    }
+    .hero-btns {
+      display: flex; flex-direction: column;
+      gap: 12px; align-items: center; margin-bottom: 52px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 9px; border-radius: 50px; font-family: 'Sora', sans-serif;
+      font-weight: 700; font-size: .97rem; cursor: pointer; border: none;
+      transition: all .22s ease; text-align: center;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--white);
+      padding: 17px 36px; width: 100%; max-width: 340px;
+      box-shadow: 0 8px 28px rgba(232,93,38,.38);
+    }
+    .btn-primary:active { transform: scale(.97); box-shadow: none; }
+    .btn-outline {
+      background: rgba(255,255,255,.07); color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.2);
+      padding: 15px 36px; width: 100%; max-width: 340px;
+    }
+    .btn-dark { background: var(--ink); color: var(--white); padding: 16px 32px; }
+    .btn-wa { background: #25D366; color: var(--white); padding: 16px 32px; box-shadow: 0 6px 24px rgba(37,211,102,.3); }
+    .hero-stats {
+      display: flex; justify-content: center;
+      border-top: 1px solid rgba(255,255,255,.09);
+    }
+    .hstat {
+      flex: 1; padding: 24px 8px;
+      border-right: 1px solid rgba(255,255,255,.09); text-align: center;
+    }
+    .hstat:last-child { border-right: none; }
+    .hstat-num {
+      font-family: 'Lora', serif; font-size: 1.7rem;
+      font-weight: 600; color: var(--gold); display: block; letter-spacing: -.02em;
+    }
+    .hstat-lbl {
+      font-size: .65rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: rgba(255,255,255,.45); margin-top: 3px; display: block;
+    }
+
+    /* ─── TRUST STRIP ─── */
+    .trust { background: var(--light); border-bottom: 1px solid var(--border); padding: 16px 20px; }
+    .trust-inner { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; }
+    .trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .78rem; font-weight: 600; color: var(--ink2); white-space: nowrap;
+    }
+
+    /* ─── SECTION ─── */
+    .section { padding: 60px 24px; }
+    .section.alt { background: var(--light); }
+    .section.dark { background: var(--ink); color: var(--white); }
+    .s-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block;
+    }
+    .section.dark .s-tag { color: var(--gold); }
+    .s-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.55rem, 5vw, 2.2rem);
+      font-weight: 700; line-height: 1.22;
+      letter-spacing: -.022em; margin-bottom: 12px;
+    }
+    .s-sub { font-size: .93rem; color: var(--ink2); line-height: 1.72; margin-bottom: 36px; }
+    .section.dark .s-sub { color: rgba(255,255,255,.6); }
+    .container { max-width: 960px; margin: 0 auto; }
+
+    /* ─── SERVICES ─── */
+    .svc-list { display: flex; flex-direction: column; gap: 14px; }
+    .svc-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--r); padding: 22px 20px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .svc-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .svc-icon { width: 50px; height: 50px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .svc-body h3 { font-size: .97rem; font-weight: 700; margin-bottom: 5px; }
+    .svc-body p { font-size: .83rem; color: var(--ink2); line-height: 1.6; }
+    .svc-pill {
+      display: inline-block; margin-top: 9px; font-size: .68rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase; padding: 4px 11px; border-radius: 50px;
+    }
+
+    /* ─── CTA BLOCK ─── */
+    .cta-block { background: var(--accent); border-radius: 22px; padding: 40px 28px; text-align: center; color: var(--white); }
+    .cta-block h2 { font-family: 'Lora', serif; font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 10px; }
+    .cta-block p { font-size: .88rem; opacity: .85; line-height: 1.65; margin-bottom: 26px; }
+    .btn-white {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--white); color: var(--accent);
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: .95rem;
+      padding: 15px 32px; border-radius: 50px; border: none; cursor: pointer;
+      transition: transform .2s; width: 100%; max-width: 300px;
+    }
+    .btn-white:active { transform: scale(.97); }
+
+    /* ─── TIERS ─── */
+    .tiers { display: flex; flex-direction: column; gap: 16px; }
+    .tier-card {
+      border-radius: 20px; padding: 28px 24px;
+      border: 2px solid var(--border); background: var(--white);
+    }
+    .tier-card.featured { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .tier-badge {
+      display: inline-block; font-size: .68rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 50px; margin-bottom: 18px;
+      background: rgba(13,27,42,.08); color: var(--ink2);
+    }
+    .tier-card.featured .tier-badge { background: rgba(255,255,255,.2); color: var(--white); }
+    .tier-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .tier-card h3 { font-family: 'Lora', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+    .tier-card p { font-size: .85rem; line-height: 1.65; color: var(--ink2); margin-bottom: 18px; }
+    .tier-card.featured p { color: rgba(255,255,255,.82); }
+    .tier-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .tier-features li { font-size: .84rem; color: var(--ink2); display: flex; align-items: center; gap: 9px; }
+    .tier-card.featured .tier-features li { color: rgba(255,255,255,.88); }
+    .tier-features li::before { content: '✓'; font-weight: 800; color: var(--teal); font-size: .85rem; flex-shrink: 0; }
+    .tier-card.featured .tier-features li::before { color: var(--gold); }
+
+    /* ─── CAMP ─── */
+    .camp {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--green) 100%);
+      border-radius: 22px; padding: 40px 28px; color: var(--white);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .camp::before { content: '☀️'; font-size: 160px; position: absolute; top: -40px; right: -30px; opacity: .12; pointer-events: none; }
+    .camp h2 { font-family: 'Lora', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.02em; position: relative; }
+    .camp p { font-size: .88rem; line-height: 1.65; opacity: .85; margin-bottom: 20px; position: relative; }
+    .camp-months { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; position: relative; }
+    .camp-pill { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.25); color: var(--white); font-size: .78rem; font-weight: 700; padding: 7px 18px; border-radius: 50px; }
+
+    /* ─── ABOUT ─── */
+    .about-points { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .about-point { display: flex; align-items: flex-start; gap: 14px; padding: 18px; background: var(--white); border-radius: 13px; border: 1px solid var(--border); }
+    .aicon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: rgba(232,93,38,.1); }
+    .about-point h4 { font-size: .92rem; font-weight: 700; margin-bottom: 3px; }
+    .about-point p { font-size: .8rem; color: var(--ink2); line-height: 1.55; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testi-list { display: flex; flex-direction: column; gap: 16px; }
+    .testi-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r); padding: 26px 22px; }
+    .stars { color: var(--gold); font-size: .9rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testi-card blockquote { font-family: 'Lora', serif; font-style: italic; font-size: .95rem; color: var(--ink); line-height: 1.7; margin-bottom: 20px; }
+    .testi-author { display: flex; align-items: center; gap: 13px; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; color: var(--white); flex-shrink: 0; }
+    .author-name { font-size: .88rem; font-weight: 700; }
+    .author-role { font-size: .76rem; color: var(--ink2); margin-top: 2px; }
+
+    /* ─── CONTACT ─── */
+    .contact-methods { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .contact-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px; background: var(--white);
+      border: 1.5px solid var(--border); border-radius: var(--r);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .contact-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .contact-card.wa { border-color: rgba(37,211,102,.4); }
+    .contact-card.wa:hover { box-shadow: 0 8px 28px rgba(37,211,102,.18); }
+    .cicon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .clabel { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink2); margin-bottom: 2px; }
+    .cval { font-size: .95rem; font-weight: 700; color: var(--ink); }
+    .carrow { margin-left: auto; font-size: 1.1rem; color: var(--ink2); }
+
+    /* FORM */
+    .form-wrap { background: var(--white); border: 1.5px solid var(--border); border-radius: 20px; padding: 28px 22px; }
+    .form-wrap h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+    .form-wrap .form-desc { font-size: .82rem; color: var(--ink2); margin-bottom: 24px; line-height: 1.6; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: .78rem; font-weight: 700; color: var(--ink2); margin-bottom: 6px; letter-spacing: .03em; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1.5px solid var(--border); border-radius: 12px;
+      font-family: 'Sora', sans-serif; font-size: .9rem;
+      color: var(--ink); background: var(--light);
+      outline: none; transition: border-color .2s, background .2s; appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .submit-btn {
+      width: 100%; padding: 16px; background: var(--accent); color: var(--white);
+      border: none; border-radius: 50px; font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: background .2s, transform .15s; margin-top: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .submit-btn:active { transform: scale(.97); background: #c94d1a; }
+    .success-toast { display: none; background: #d4edda; border-radius: 12px; color: #155724; font-size: .88rem; font-weight: 600; padding: 16px; text-align: center; margin-top: 14px; }
+
+    /* HOURS */
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table td { padding: 10px 0; font-size: .88rem; border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table td:first-child { color: var(--ink2); font-weight: 500; }
+    .hours-table td:last-child { font-weight: 700; text-align: right; }
+
+    /* MAP */
+    .map-box { background: linear-gradient(135deg, var(--teal), var(--ink)); border-radius: 18px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--white); gap: 8px; margin-top: 28px; }
+    .map-box p { font-size: .82rem; opacity: .7; }
+    .map-link { display: inline-flex; align-items: center; gap: 6px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: .82rem; padding: 9px 20px; border-radius: 50px; margin-top: 4px; transition: transform .2s; }
+    .map-link:active { transform: scale(.97); }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(255,255,255,.5); padding: 48px 24px 32px; text-align: center; }
+    .f-logo { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+    .f-logo span { color: var(--gold); }
+    footer .fdesc { font-size: .82rem; line-height: 1.65; max-width: 300px; margin: 0 auto 24px; }
+    .f-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 28px; }
+    .f-links a { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.5); transition: color .2s; }
+    .f-links a:hover { color: var(--gold); }
+    .f-copy { font-size: .74rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: 20px; }
+
+    /* FLOATING WA */
+    .wa-float {
+      position: fixed; bottom: 22px; right: 20px; z-index: 400;
+      background: #25D366; color: var(--white);
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; box-shadow: 0 6px 24px rgba(37,211,102,.4);
+      transition: transform .2s;
+    }
+    .wa-float:active { transform: scale(.92); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* DESKTOP */
+    @media (min-width: 600px) {
+      .hero-btns { flex-direction: row; justify-content: center; }
+      .btn-primary, .btn-outline { width: auto; }
+      .tiers { flex-direction: row; }
+      .tier-card { flex: 1; }
+    }
+    @media (min-width: 820px) {
+      .section { padding: 80px 40px; }
+      .hero { padding: 72px 40px 0; }
+      .nav { padding: 16px 40px; }
+    }
+    @media (max-width: 400px) {
+      .form-row { grid-template-columns: 1fr; }
+      .nav-phone { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/355694556722" target="_blank" aria-label="Na shkruani në WhatsApp">💬</a>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <div class="nav-logo">Qyteza <span>Jonë</span> 🌝</div>
+  <div class="nav-right">
+    <a class="nav-phone" href="tel:+355694556722">📞 069 455 6722</a>
+    <a class="nav-btn" href="#kontakt">Regjistrohu</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Kuçovë · Hapur që prej 2024</div>
+    <h1>Fëmija juaj meriton <em>më të mirën</em> — ne e japim</h1>
+    <p class="hero-sub">
+      Ndihmë me detyra, kurse lëndore, gjuhë të huaja, kurs kërcimi dhe mbështetje psikologjike për fëmijët 6–17 vjeç. Rezultate reale, prindër të kënaqur.
+    </p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="#kontakt">📋 Regjistro Fëmijën</a>
+      <a class="btn btn-outline" href="#sherbimet">Shiko Shërbimet →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-num">200+</span><span class="hstat-lbl">Nxënës</span></div>
+      <div class="hstat"><span class="hstat-num">12+</span><span class="hstat-lbl">Kurse</span></div>
+      <div class="hstat"><span class="hstat-num">4.9★</span><span class="hstat-lbl">Vlerësim</span></div>
+      <div class="hstat"><span class="hstat-num">95%</span><span class="hstat-lbl">Kënaqësi</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST STRIP ─── -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item">✅ Mësues të kualifikuar</div>
+    <div class="trust-item">🔒 Mjedis i sigurt</div>
+    <div class="trust-item">📊 Raporte për prindërit</div>
+    <div class="trust-item">⚡ Rezultate të shpejta</div>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section class="section alt" id="sherbimet">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag">Shërbimet</span>
+      <h2 class="s-title">Gjithçka që nevojitet fëmija juaj</h2>
+      <p class="s-sub">Nga ndihmë me detyrat te kurse të specializuara — ofrojmë një ekosistem të plotë zhvillimi, jo vetëm mësime.</p>
+    </div>
+    <div class="svc-list reveal">
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#FFF0E8">📝</div>
+        <div class="svc-body">
+          <h3>Ndihmë me Detyrat e Shtëpisë</h3>
+          <p>Mbikëqyrje profesionale çdo ditë pas shkollës. Fëmija arrin në shtëpi i qetë — detyrat mbaruar, lëndët të kuptuara.</p>
+          <span class="svc-pill" style="background:rgba(232,93,38,.1);color:var(--accent)">Klasa 1–9 · Çdo ditë</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#E8F4F8">📐</div>
+        <div class="svc-body">
+          <h3>Kurse Lëndore të Specializuara</h3>
+          <p>Matematikë, Fizikë, Kimi, Biologji, Informatikë, Gjuhë Shqipe. Mëso me thellësi dhe avancoje notën.</p>
+          <span class="svc-pill" style="background:rgba(14,124,123,.1);color:var(--teal)">Klasa 6–12 · Grupe të vogla</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#FFF8E0">🌍</div>
+        <div class="svc-body">
+          <h3>Gjuhë të Huaja</h3>
+          <p>Anglisht, Italisht dhe më shumë — metoda moderne dhe ndërvepruese. I dobishëm për shkollën dhe karrierën.</p>
+          <span class="svc-pill" style="background:rgba(245,166,35,.1);color:#9a6d10">Të gjitha moshat</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#FCE4EC">💃</div>
+        <div class="svc-body">
+          <h3>Kurs Kërcimi</h3>
+          <p>Arte të lëvizjes për të gjitha moshat. Ndihmon me besim, disiplinë dhe ekspresion krijues.</p>
+          <span class="svc-pill" style="background:rgba(232,93,38,.1);color:var(--accent)">Të gjitha nivelet</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#E8F5E9">🧠</div>
+        <div class="svc-body">
+          <h3>Shërbim Psikologjik</h3>
+          <p>Psikolog profesionist për fëmijët dhe adoleshentët. Mbështetje konfidenciale për mirëqenie emocionale e sociale.</p>
+          <span class="svc-pill" style="background:rgba(45,106,79,.1);color:var(--green)">Konfidencial · Professional</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#F3E5F5">🎨</div>
+        <div class="svc-body">
+          <h3>Aktivitete Kreative & Fundjavore</h3>
+          <p>Arte, punëtori, lojëra sociale. Fëmijët socializohen, argëtohen dhe zhvillojnë kreativitetin.</p>
+          <span class="svc-pill" style="background:rgba(14,124,123,.1);color:var(--teal)">Fundjavë · Për të gjithë</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INLINE CTA 1 ─── -->
+<section class="section" style="padding-top:0;padding-bottom:52px">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Sesion provë falas 🎁</h2>
+      <p>Lëre fëmijën të provojë një sesion falas para se të regjistrohesh. Pa angazhim — vetëm rezultate.</p>
+      <a class="btn-white" href="#kontakt">Rezervo Sesionin Falas →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROGRAMS ─── -->
+<section class="section alt" id="programet">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag">Programet</span>
+      <h2 class="s-title">Gjeni programin e duhur</h2>
+      <p class="s-sub">Tre nivele të dizajnuara sipas moshës dhe nevojës specifike të fëmijës suaj.</p>
+    </div>
+    <div class="tiers reveal">
+      <div class="tier-card">
+        <div class="tier-badge">Klasa 1–5 · Bazë</div>
+        <span class="tier-icon">🌱</span>
+        <h3>Programi Fillestar</h3>
+        <p>Detyra, lojëra edukative dhe aktivitete krijuese për fëmijët e vegjël.</p>
+        <ul class="tier-features">
+          <li>Ndihmë detyra çdo ditë</li>
+          <li>Lexim & shkrim i avancuar</li>
+          <li>Lojëra edukative</li>
+          <li>Arte & kreativitet</li>
+        </ul>
+      </div>
+      <div class="tier-card featured">
+        <div class="tier-badge">⭐ Më i Popullarizuari · Klasa 6–9</div>
+        <span class="tier-icon">🚀</span>
+        <h3>Programi Avancuar</h3>
+        <p>Kurse intensive, detyra të vështira dhe përgatitje e plotë për provimet.</p>
+        <ul class="tier-features">
+          <li>6 lëndë të specializuara</li>
+          <li>Ndihmë 1-me-1 kur duhet</li>
+          <li>Simulime provimesh</li>
+          <li>Psikolog i integruar</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-badge">Klasa 10–12 · Elitar</div>
+        <span class="tier-icon">🎯</span>
+        <h3>Programi Elitar</h3>
+        <p>Përgatitje intensive për maturën shtetërore dhe konkurset kombëtare.</p>
+        <ul class="tier-features">
+          <li>Matura & provimet finale</li>
+          <li>Konkurse akademike</li>
+          <li>Orientim profesional</li>
+          <li>Mentorim i personalizuar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SUMMER CAMP ─── -->
+<section class="section">
+  <div class="container">
+    <div class="camp reveal">
+      <h2>Kampi Veror 2025 ☀️</h2>
+      <p>Tre muaj me aventura, miqësi dhe të mësuarit në mënyrën më argëtuese! Vendet janë të kufizuara — regjistrohu tani.</p>
+      <div class="camp-months">
+        <span class="camp-pill">🌿 Qershor</span>
+        <span class="camp-pill">☀️ Korrik</span>
+        <span class="camp-pill">🍂 Gusht</span>
+      </div>
+      <a class="btn btn-dark" href="#kontakt" style="display:inline-flex;margin:0 auto">Rezervo Vendin Tani →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="section alt" id="rreth">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag">Pse Ne</span>
+      <h2 class="s-title">Më shumë se thjesht mësime</h2>
+      <p class="s-sub">Qyteza Jonë është vendi ku fëmija juaj ndjehet i sigurt, i motivuar dhe i kuptuar — çdo ditë.</p>
+    </div>
+    <div class="about-points reveal">
+      <div class="about-point">
+        <div class="aicon">👩‍🏫</div>
+        <div>
+          <h4>Mësues të Kualifikuar me Eksperiencë</h4>
+          <p>Stafi ynë ka eksperiencë reale dhe pasion për edukimin. Nuk jemi thjesht leksione — jemi mentorë.</p>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="aicon">👥</div>
+        <div>
+          <h4>Grupe të Vogla — Vëmendje Individuale</h4>
+          <p>Çdo fëmijë merr kohën e nevojshme. Asnjë nuk mbetet prapa, asnjë nuk lihet pa u ndihmuar.</p>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="aicon">📊</div>
+        <div>
+          <h4>Raporte të Rregullta për Prindërit</h4>
+          <p>Ju informojmë gjithmonë për progresin e fëmijës suaj. Transparencë e plotë, gjithmonë.</p>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="aicon">🏡</div>
+        <div>
+          <h4>Mjedis i Sigurt dhe i Ngrohtë</h4>
+          <p>Fëmijët vijnë me dëshirë — sepse ndjehen si në shtëpi. Kënaqësi e garantuar.</p>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-primary" href="#kontakt" style="display:inline-flex">Na Vizitoni Sot →</a>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="section" id="vleresimet">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag">Vlerësimet</span>
+      <h2 class="s-title">Çfarë thonë prindërit tanë</h2>
+      <p class="s-sub">Fjalët e tyre tregojnë më shumë se çdo gjë tjetër.</p>
+    </div>
+    <div class="testi-list reveal">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Vajza ime filloi ta gjejë matematikën interesante pas dy javësh. Mësuesit janë të durueshëm dhe shumë profesionalë. Nuk mund ta imagjinoj pa Qytezën Jonë!"</blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:var(--teal)">MH</div>
+          <div>
+            <div class="author-name">Mirela Hoxha</div>
+            <div class="author-role">Nënë e Elsa-s, 11 vjeç</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Djali im tani pret me padurim të shkojë çdo ditë. Ambienti është shumë i ngrohtë dhe shihet kujdesi i vërtetë nga ana e gjithë stafit."</blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:var(--accent)">AK</div>
+          <div>
+            <div class="author-name">Arben Kodra</div>
+            <div class="author-role">Baba i Erion-it, 9 vjeç</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Shërbimi psikologjik ka qenë i jashtëzakonshëm. Vajza ime u bë shumë më e sigurt me veten dhe me shkollën. Faleminderit nga zemra!"</blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:var(--green)">LB</div>
+          <div>
+            <div class="author-name">Lira Beqiri</div>
+            <div class="author-role">Nënë e Sara-s, 14 vjeç</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="section alt" id="kontakt">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag">Kontakti</span>
+      <h2 class="s-title">Na kontaktoni tani</h2>
+      <p class="s-sub">Zgjidhni mënyrën që ju vjen më lehtë. Ju përgjigjemi brenda 1 ore gjatë orarit të punës.</p>
+    </div>
+
+    <div class="contact-methods reveal">
+      <a class="contact-card wa" href="https://wa.me/355694556722" target="_blank">
+        <div class="cicon" style="background:#E8FFF0">💬</div>
+        <div>
+          <div class="clabel">WhatsApp — Mënyra më e shpejtë</div>
+          <div class="cval">+355 694 556 722</div>
+        </div>
+        <div class="carrow">→</div>
+      </a>
+      <a class="contact-card" href="tel:+355694556722">
+        <div class="cicon" style="background:#FFF0E8">📞</div>
+        <div>
+          <div class="clabel">Telefoni</div>
+          <div class="cval">+355 694 556 722</div>
+        </div>
+        <div class="carrow">→</div>
+      </a>
+      <a class="contact-card" href="mailto:rasenieriselda@yahoo.com">
+        <div class="cicon" style="background:#E8F4F8">✉️</div>
+        <div>
+          <div class="clabel">Email</div>
+          <div class="cval">rasenieriselda@yahoo.com</div>
+        </div>
+        <div class="carrow">→</div>
+      </a>
+    </div>
+
+    <div class="form-wrap reveal">
+      <h3>Regjistro Fëmijën 🌟</h3>
+      <p class="form-desc">Plotëso formularin dhe ne ju kontaktojmë brenda 24 orëve për të gjetur programin e duhur.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Emri i Prindërit *</label>
+          <input type="text" id="fName" placeholder="Emri juaj" />
+        </div>
+        <div class="form-group">
+          <label>Numri i Telefonit *</label>
+          <input type="tel" id="fPhone" placeholder="069 XXX XXXX" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Emri i Fëmijës *</label>
+        <input type="text" id="fChild" placeholder="Emri i fëmijës" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Klasa / Mosha</label>
+          <select id="fGrade">
+            <option value="">Zgjidhni...</option>
+            <option>Klasa 1–3 (6–9 vjeç)</option>
+            <option>Klasa 4–5 (10–11 vjeç)</option>
+            <option>Klasa 6–9 (12–15 vjeç)</option>
+            <option>Klasa 10–12 (16–18 vjeç)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Programi i Interesit</label>
+          <select id="fProgram">
+            <option value="">Zgjidhni...</option>
+            <option>Detyrat e Shtëpisë</option>
+            <option>Kurse Lëndore</option>
+            <option>Gjuhë të Huaja</option>
+            <option>Kurs Kërcimi</option>
+            <option>Kamp Veror</option>
+            <option>Shërbim Psikologjik</option>
+            <option>Aktivitete Fundjavore</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mesazh (opsional)</label>
+        <textarea id="fMsg" placeholder="Na tregoni çfarë kërkoni ose nëse keni pyetje..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendForm()">
+        📋 Dërgo Regjistrimin
+      </button>
+      <div class="success-toast" id="fSuccess">🎉 Faleminderit! Do ju kontaktojmë shumë shpejt!</div>
+    </div>
+
+    <div class="reveal" style="margin-top:36px">
+      <h3 style="font-family:'Lora',serif;font-size:1.1rem;font-weight:700;margin-bottom:16px">🕐 Orari i Punës</h3>
+      <table class="hours-table">
+        <tr><td>E Hënë – E Premte</td><td>14:00 – 20:00</td></tr>
+        <tr><td>E Shtunë</td><td>09:00 – 13:00</td></tr>
+        <tr><td>Verë (Qershor – Gusht)</td><td>09:00 – 17:00</td></tr>
+        <tr><td>E Diel</td><td>Mbyllur</td></tr>
+      </table>
+      <div class="map-box">
+        <span style="font-size:2rem">📍</span>
+        <strong style="font-size:1rem">Rruga Raiffeisen, Kuçovë</strong>
+        <p>Afër qendrës së qytetit</p>
+        <a class="map-link" href="https://maps.google.com/?q=Kucove,Albania" target="_blank">🗺️ Hap Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ─── -->
+<section class="section dark" style="text-align:center">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-tag" style="text-align:center;display:block">Eja me Ne</span>
+      <h2 class="s-title" style="color:white;max-width:480px;margin:0 auto 14px">Fëmija juaj meriton një start të mirë</h2>
+      <p class="s-sub" style="max-width:400px;margin:0 auto 32px">Regjistrohu sot dhe fillo udhëtimin drejt suksesit akademik. Vendet janë të kufizuara!</p>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <a class="btn btn-primary" href="#kontakt" style="max-width:320px;width:100%">📋 Regjistro Fëmijën Tani</a>
+        <a class="btn btn-wa" href="https://wa.me/355694556722" target="_blank" style="max-width:320px;width:100%">💬 Na Shkruani në WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="f-logo">Qyteza <span>Jonë</span> 🌝</div>
+  <p class="fdesc">Shtëpia e dytë e fëmijës suaj — ku edukimi takon argëtimin dhe potenciali nuk ka kufi.</p>
+  <div class="f-links">
+    <a href="#sherbimet">Shërbimet</a>
+    <a href="#programet">Programet</a>
+    <a href="#rreth">Rreth Nesh</a>
+    <a href="#vleresimet">Vlerësimet</a>
+    <a href="#kontakt">Kontakti</a>
+  </div>
+  <div class="f-copy">© 2025 Qyteza Jonë · Kuçovë, Shqipëri · Të gjitha të drejtat e rezervuara</div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Form
+  function sendForm() {
+    const n = document.getElementById('fName').value.trim();
+    const p = document.getElementById('fPhone').value.trim();
+    const c = document.getElementById('fChild').value.trim();
+    if (!n || !p || !c) { alert('Ju lutemi plotësoni emrin, telefonin dhe emrin e fëmijës!'); return; }
+    const t = document.getElementById('fSuccess');
+    t.style.display = 'block';
+    ['fName','fPhone','fChild','fGrade','fProgram','fMsg'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+    });
+    setTimeout(() => t.style.display = 'none', 6000);
+  }
+</script>
+</body>
+</html>
